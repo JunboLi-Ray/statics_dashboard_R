@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+      "experimentalDecorators": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "lib": ["es2017", "dom"]
+  }
+}

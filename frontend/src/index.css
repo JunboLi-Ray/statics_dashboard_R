@@ -1,0 +1,11 @@
+html,
+body,
+:global(#root) {
+  height: 100%;
+}
+iframe {
+  display: block;       /* iframes are inline by default */
+  border: none;         /* Reset default border */
+  height: 600vh;        /* Viewport-relative units */
+  width: 100%;
+}
