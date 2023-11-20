@@ -12,8 +12,6 @@ antd charts: https://ant-design-charts.antgroup.com/zh/examples/flowchart/basic/
 
 #### web
 * node: https://nodejs.org/en
-* <code>sudo npm install @ant-design/charts --save</code>
-* <code>sudo npm install af-webpack</code>
 * <code>yarn</code>
 
 
@@ -25,4 +23,5 @@ antd charts: https://ant-design-charts.antgroup.com/zh/examples/flowchart/basic/
 
 #### web
 * <code>cd frontend</code>
+* <code>export NODE_OPTIONS="--openssl-legacy-provider"</code>
 * <code>yarn start</code>
