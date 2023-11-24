@@ -1,8 +1,8 @@
 package constant
 
 const (
-	DBHost     = ""
-	DBPort     = ""
+	DBHost     = "127.0.0.1"
+	DBPort     = "3306"
 	DBUserName = "root"
 	DBPassword = "rootroot"
 

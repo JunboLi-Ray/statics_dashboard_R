@@ -17,11 +17,11 @@ func NewController() *Controller {
 func (controller *Controller) RegisterRoute(r gin.IRouter) {
 	group := r.Group("/data_a")
 	group.GET("/list", controller.getList)
-	group.POST("/insert", controller.insert)
+	group.POST("/add", controller.add)
 }
 
 func (controller *Controller) getList(c *gin.Context) {
-	resp, err := controller.service.GetList()
+	resp, err := controller.service.GetList(c.Request.Context())
 	if err != nil {
 		c.JSON(400, nil)
 		return
@@ -29,6 +29,17 @@ func (controller *Controller) getList(c *gin.Context) {
 	c.JSON(200, resp)
 }
 
-func (controller *Controller) insert(c *gin.Context) {
+func (controller *Controller) add(c *gin.Context) {
+	obj := &DataA{}
+	err := c.ShouldBindJSON(obj)
+	if err != nil {
+		c.JSON(400, nil)
+		return
+	}
+	err = controller.service.Add(c.Request.Context(), obj)
+	if err != nil {
+		c.JSON(400, nil)
+		return
+	}
 	c.JSON(200, nil)
 }

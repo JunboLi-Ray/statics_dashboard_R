@@ -1,6 +1,7 @@
 package data_a
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"github.com/JunboLi-Ray/R/app/constant"
@@ -28,13 +29,13 @@ func NewRepo() *Repo {
 	}
 }
 
-func (r *Repo) insert(obj *DataA) error {
+func (r *Repo) insert(_ context.Context, obj *DataA) error {
 	insertQuery := "INSERT INTO data_a (user_name, action, content) VALUES (?, ?, ?)"
 	_, err := r.db.Exec(insertQuery, obj.UserName, obj.Action, obj.Content)
 	return err
 }
 
-func (r *Repo) query() ([]*DataA, error) {
+func (r *Repo) query(_ context.Context) ([]*DataA, error) {
 	selectQuery := "SELECT * FROM data_a"
 	rows, err := r.db.Query(selectQuery)
 	if err != nil {

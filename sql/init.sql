@@ -1,3 +1,5 @@
+CREATE DATABASE basic;
+
 CREATE TABLE data_a
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
