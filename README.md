@@ -4,6 +4,9 @@ base on antd charts、yarn、golang、postgres，data insert and custom show pla
 antd charts: https://ant-design-charts.antgroup.com/zh/examples/flowchart/basic/#basic
 
 
+## Info
+* DB config: app/constant/db.go
+
 ## Install
 
 #### backend
