@@ -1,4 +1,4 @@
-CREATE DATABASE basic;
+CREATE schema basic;
 
 CREATE TABLE data_a
 (

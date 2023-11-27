@@ -2,9 +2,12 @@ package data_a
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
+	"log"
+
+	"database/sql"
 	"github.com/JunboLi-Ray/R/app/constant"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Repo struct {
@@ -12,15 +15,15 @@ type Repo struct {
 }
 
 func NewRepo() *Repo {
-	db, err := sql.Open("mysql",
-		fmt.Sprintf("username:password@tcp(hostname:port)/database_name",
-			constant.DBUserName,
-			constant.DBPassword,
-			constant.DBHost,
-			constant.DBPort,
-			constant.DBDataBaseBasic,
-		),
+	dataSourceName := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v",
+		constant.DBUserName,
+		constant.DBPassword,
+		constant.DBHost,
+		constant.DBPort,
+		constant.DBDataBaseBasic,
 	)
+	log.Println("db url", dataSourceName)
+	db, err := sql.Open("mysql", dataSourceName)
 	if err != nil {
 		panic(err.Error())
 	}

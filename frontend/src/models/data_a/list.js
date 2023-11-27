@@ -56,7 +56,7 @@ export default class DataAListPage extends React.Component {
       return <Spin/>;
     }
     var data = this.getRecords()
-    if (data.length === 0) {
+    if (data === undefined || data.length === 0) {
       return (
         <div
           style={{

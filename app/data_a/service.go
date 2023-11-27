@@ -17,7 +17,12 @@ func NewService() *Service {
 }
 
 func (s *Service) GetList(ctx context.Context) ([]*DataA, error) {
-	return s.repo.query(ctx)
+	result, err := s.repo.query(ctx)
+	if err != nil {
+		log.Println("error", err.Error())
+		return nil, err
+	}
+	return result, nil
 }
 
 func (s *Service) Add(ctx context.Context, obj *DataA) error {
