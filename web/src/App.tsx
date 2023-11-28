@@ -6,7 +6,7 @@ import IndexPage from './modules/index/indexPage'
 function App() {
     return (
         <ConfigProvider theme={{
-            algorithm: theme.darkAlgorithm,
+            algorithm: theme.defaultAlgorithm,
         }}>
             <IndexPage/>
         </ConfigProvider>

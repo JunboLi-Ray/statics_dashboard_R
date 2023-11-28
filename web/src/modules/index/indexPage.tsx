@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FileOutlined, PieChartOutlined,} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Layout, Menu, theme} from 'antd';
-import IndexDashBoard from './dashboard';
+import IndexDashBoard from '../dashboard/index';
 
 const {Header, Content, Footer, Sider} = Layout;
 
