@@ -1,14 +1,16 @@
 import GridLayout from "react-grid-layout";
 import React from 'react';
 import {Bar, Column, Pie} from '@ant-design/charts';
+import { Divider } from 'antd';
 
 export default class IndexDashBoard extends React.Component {
     render() {
         // layout is an array of objects, see the demo for more complete usage
         const layout = [
             {i: "bar", x: 0, y: 0, w: 6, h: 6},
-            {i: "pie", x: 6, y: 0, w: 6, h: 12, minW: 12, minH: 6},
-            {i: "column", x: 0, y: 1, w: 6, h: 6}
+            {i: "column", x: 0, y: 12, w: 6, h: 6},
+            {i: "column2", x: 0, y: 24, w: 6, h: 6},
+            {i: "pie", x: 6, y: 0, w: 6, h: 12, minW: 12, minH: 6}
         ];
         const barData = [
             {year: '2015', value: 100},
@@ -180,15 +182,19 @@ export default class IndexDashBoard extends React.Component {
                 width={1200}
             >
                 <div key="bar">
-                    <h2>柱状图</h2>
+                    <Divider orientation="left">柱状图</Divider>
                     <Bar {...barConfig} />
                 </div>
                 <div key="pie">
-                    <h2>饼图</h2>
+                    <Divider orientation="left">饼图</Divider>
                     <Pie {...pieConfig} />
                 </div>
                 <div key="column">
-                    <h2>饼图</h2>
+                    <Divider orientation="left">折线图</Divider>
+                    <Column {...columnConfig} />
+                </div>
+                <div key="column2">
+                    <Divider orientation="left">折线图2</Divider>
                     <Column {...columnConfig} />
                 </div>
             </GridLayout>

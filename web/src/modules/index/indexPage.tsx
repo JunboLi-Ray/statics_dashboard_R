@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {FileOutlined, PieChartOutlined,} from '@ant-design/icons';
+import React, {lazy, Suspense, useState} from 'react';
+import {FileOutlined, PieChartOutlined, SketchCircleFilled} from '@ant-design/icons';
 import type {MenuProps} from 'antd';
-import {Layout, Menu, theme} from 'antd';
-import IndexDashBoard from '../dashboard/index';
+import {ConfigProvider, Layout, Menu, Spin, theme} from 'antd';
+import {Route, routerRedux} from 'dva/router';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -30,28 +30,54 @@ const items: MenuItem[] = [
     ]),
 ];
 
+const indexDashboard = lazy(() => import('../dashboard/index'))
+const dataAList = lazy(() => import('../dashboard/index'))
+const dataAInsert = lazy(() => import('../dashboard/index'))
+
+
 const App: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const {
-        token: {colorBgContainer},
-    } = theme.useToken();
+    const {token: {colorBgContainer},} = theme.useToken();
+
+    const handleMenuClick = ({keyPath}: { keyPath: string[] }) => {
+        console.log(keyPath.join("/"))
+        routerRedux.push(keyPath.reverse().join('/'));
+    };
 
     return (
-        <Layout style={{minHeight: '100vh'}}>
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                <div className="demo-logo-vertical"/>
-                <Menu theme="dark" defaultSelectedKeys={['dashBoard']} mode="inline" items={items}/>
-            </Sider>
-            <Layout>
-                <Header style={{padding: 0, background: colorBgContainer}}/>
-                <Content style={{margin: '0 16px'}}>
-                    <div style={{padding: 24, minHeight: 360, background: colorBgContainer}}>
-                        <IndexDashBoard/>
+        <ConfigProvider theme={{
+            algorithm: theme.defaultAlgorithm,
+        }}>
+            <Layout style={{minHeight: '100vh'}}>
+                <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+                    <div className="demo-logo-vertical">
+                        Project R
+                        <SketchCircleFilled/>
                     </div>
-                </Content>
-                <Footer style={{textAlign: 'center'}}>©2023 Created by R</Footer>
+                    <Menu theme="dark" defaultSelectedKeys={['dashBoard']}
+                          mode="inline" items={items} onClick={handleMenuClick}/>
+                </Sider>
+                <Layout>
+                    <Header style={{padding: 0, background: colorBgContainer}}/>
+                    <Content style={{margin: '0 16px'}}>
+                        <div style={{padding: 24, minHeight: 360, background: colorBgContainer}}>
+                            <Suspense
+                                fallback={
+                                    <div className="loading">
+                                        <Spin size="large" tip="Loading"/>
+                                    </div>
+                                }
+                            >
+                                <Route path="/dashBoard" component={indexDashboard}/>
+                                <Route path="/data_a/list" component={dataAList}/>
+                                <Route path="/data_a/insert" component={dataAInsert}/>
+                            </Suspense>
+                        </div>
+                    </Content>
+                    <Footer style={{textAlign: 'center'}}>©2023 Created by R</Footer>
+                </Layout>
             </Layout>
-        </Layout>
+        </ConfigProvider>
     );
 };
 
